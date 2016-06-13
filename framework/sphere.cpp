@@ -8,6 +8,7 @@ float Sphere::area() const
     return (M_PI * ( (2 * radius_) * (2 * radius_) );
 }
 
+// 3/3 * PI * r^3
 float Sphere::volume() const
 {
     
