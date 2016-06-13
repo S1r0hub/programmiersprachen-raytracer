@@ -10,7 +10,9 @@ class Sphere : public Shape
 
     public:
         Sphere() : cp(vec3{0.f,0.f,0.f}), radius_(0.f) {}
+
         Sphere(vec3 const& centerpoint, float radius) : cp(centerpoint), radius_(radius) {}
+        
         Sphere(float cp_x, float cp_y, float cp_z, float radius) : cp(vec3{cp_x,cp_y,cp_z}), radius_(radius) {}
 
         float area() const override;

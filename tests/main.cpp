@@ -25,6 +25,18 @@ TEST_CASE("Aufgabe 5.2 - sphere and box", "[sphereTest] [boxTest]")
 
         REQUIRE(box2->area() == Approx(23.5f));
         REQUIRE(box2->volume() == Approx(4.375f));
+
+        // testing getMinimum and getMaximum
+        vec3 v1{0,0,0};
+        vec3 v2{2,2,2};
+        sptr<Box> box3 = std::make_shared<Box>(Box{v1,v2});
+        REQUIRE(box3->getMinimum() == v1);
+        REQUIRE(box3->getMaximum() == v2);
+
+        // testing setMinimum and setMaximum
+        box3->setMaximum(vec3{2,1,2});
+        box3->setMinimum(vec3{2,1,2});
+        REQUIRE(box3->getMaximum() == box3->getMinimum());
     }
 
     SECTION("Sphere")
@@ -36,6 +48,19 @@ TEST_CASE("Aufgabe 5.2 - sphere and box", "[sphereTest] [boxTest]")
         sptr<Shape> sphere2 = std::make_shared<Sphere>(Sphere{vec3{0,0,0},10});
         REQUIRE(sphere2->area() == Approx(1256.637));
         REQUIRE(sphere2->volume() == Approx(4188.79));
+
+        // testing getRadius and getCenter
+        vec3 v1{0,1,0};
+        sptr<Sphere> sphere3 = std::make_shared<Sphere>(Sphere{v1,4});
+        REQUIRE(sphere3->getRadius() == 4);
+        REQUIRE(sphere3->getCenter() == v1);
+
+        // testing setRadius and setCenter
+        vec3 v2{8,4,3};
+        sphere3->setRadius(8);
+        sphere3->setCenter(v2);
+        REQUIRE(sphere3->getRadius() == 8);
+        REQUIRE(sphere3->getCenter() == v2);
     }
 }
 

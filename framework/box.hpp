@@ -23,9 +23,11 @@ class Box : public Shape
 
         // getter
         vec3 const& getMinimum() const;
+        vec3 const& getMaximum() const;
 
         // setter
-        void setMinimum(vec3 const& min) { min_ = min; }
+        void setMinimum(vec3 const& min);
+        void setMaximum(vec3 const& min);
 
     private:
         vec3 min_;
