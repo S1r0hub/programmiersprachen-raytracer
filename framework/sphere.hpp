@@ -7,20 +7,23 @@
 class Sphere : public Shape
 {
     public:
+        Sphere() : cp(glm::vec3{0f,0f,0f}), radius_(0f) {}
+        Sphere(glm::vec3 const& centerpoint, float radius) : cp(centerpoint), radius_(radius) {}
+
         float area() const;
         float volume() const;
 
-        // Getter
+        // getter
         float getRadius() const;
         glm::vec3 getCenter() const;
 
-        // Setter
+        // setter
         glm::vec3 setCenter();
         float setRadius();
 
     private:
         glm::vec3 cp; // center point
-        float radius = 0;
+        float radius_ = 0;
 };
 
 #endif
