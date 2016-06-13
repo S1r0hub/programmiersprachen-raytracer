@@ -4,8 +4,8 @@
 class Shape
 {
     public:
-        float virtual area() = 0;
-        float virtual volume() = 0;
+        virtual float area() = 0;
+        virtual float volume() = 0;
 };
 
 #endif
