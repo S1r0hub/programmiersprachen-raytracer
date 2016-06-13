@@ -6,22 +6,30 @@
 
 class Box : public Shape
 {
+    typedef glm::vec3 vec3;
+
     public:
-    	Box() : min_(glm::vec3{0f,0f,0f}), max_(glm::vec3{0f,0f,0f})
-    	Box(glm::vec3 min, glm::vec3 max) : min_(min), max_(max) {}
+    	Box() : min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f}) {}
+
+    	Box(vec3 const& min, vec3 const& max) : min_(min), max_(max) {}
+
+        Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z)
+            : min_(vec3{min_x,min_y,min_z})
+            , max_(vec3{max_x,max_y,max_z})
+        {}
         
-        float area() const;
-        float volume() const;
+        float area() const override;
+        float volume() const override;
 
         // getter
-        glm::vec3 const& getMinimum() const;
+        vec3 const& getMinimum() const;
 
         // setter
-        void setMinimum(glm::vec3 const& min) { min_ = min; }
+        void setMinimum(vec3 const& min) { min_ = min; }
 
     private:
-        glm::vec3 min_;
-        glm::vec3 max_;
+        vec3 min_;
+        vec3 max_;
 };
 
 #endif
