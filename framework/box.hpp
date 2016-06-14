@@ -2,6 +2,7 @@
 #define BOX_HPP
 
 #include <glm/vec3.hpp>
+#include <ostream>
 #include <string>
 #include "shape.hpp"
 #include "color.hpp"
@@ -42,6 +43,8 @@ class Box : public Shape
         // setter
         void setMinimum(vec3 const& min);
         void setMaximum(vec3 const& min);
+
+        std::ostream& print(std::ostream& os) const override;
 
     private:
         vec3 min_;

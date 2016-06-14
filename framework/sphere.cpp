@@ -26,3 +26,8 @@ glm::vec3 Sphere::getCenter() const { return cp; }
 glm::vec3 Sphere::setCenter(vec3 const& centerpoint) { cp = centerpoint; }
 
 float Sphere::setRadius(float radius) { radius_ = radius; }
+
+std::ostream& Sphere::print(std::ostream& os) const
+{
+	// output sphere infos here
+}
