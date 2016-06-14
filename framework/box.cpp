@@ -1,5 +1,4 @@
 #include "box.hpp"
-#include <glm/vec3.hpp>
 
 // Oberflaeche
 float Box::area() const

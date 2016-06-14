@@ -3,12 +3,13 @@
 
 #define M_PI 3.14159265358979323846 // pi
 
+#include <glm/vec3.hpp>
 #include <memory>       // shared_ptr
+
 #include "shape.hpp"
 #include "box.hpp"
 #include "sphere.hpp"
-#include <glm/vec3.hpp>
-#include <iostream>
+#include "color.hpp"
 
 template<typename T> using sptr = std::shared_ptr<T>;
 typedef glm::vec3 vec3;
@@ -62,6 +63,21 @@ TEST_CASE("Aufgabe 5.2 - sphere and box", "[sphereTest] [boxTest]")
         REQUIRE(sphere3->getRadius() == 8);
         REQUIRE(sphere3->getCenter() == v2);
     }
+}
+
+TEST_CASE("Aufgabe 5.3 - name_ and color_ for Sphere")
+{
+    Box b1{"Coole Box", vec3{0,0,0}, vec3{2,2,2}, Color{1,0,1}};
+    REQUIRE(b1.getName() == "Coole Box");
+    REQUIRE(b1.getColor().r == 1);
+    REQUIRE(b1.getColor().g == 0);
+    REQUIRE(b1.getColor().b == 1);
+
+    Sphere sp1{"Mega Sphere", vec3{0,0,0}, 12, Color{0,1,0}};
+    REQUIRE(sp1.getName() == "Mega Sphere");
+    REQUIRE(sp1.getColor().r == 0);
+    REQUIRE(sp1.getColor().g == 1);
+    REQUIRE(sp1.getColor().b == 0);
 }
 
 int main(int argc, char *argv[])
