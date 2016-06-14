@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include <string>
+#include <ostream>
 #include "color.hpp"
 
 class Shape
@@ -16,6 +17,8 @@ class Shape
         virtual float area() const = 0;
         virtual float volume() const = 0;
 
+        virtual std::ostream& print(std::ostream& os) const;
+
         str getName() const;
         Color getColor() const;
     
@@ -23,5 +26,10 @@ class Shape
         str name_;
         Color color_;
 };
+
+std::ostream& operator<<(std::ostream& os, Shape const& s)
+{
+    //return s.print(os);
+}
 
 #endif
