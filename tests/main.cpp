@@ -79,13 +79,13 @@ TEST_CASE("Aufgabe 5.3 - name_ and color_ for Sphere", "[protected attributes]")
     REQUIRE(sp1.getColor().b == 0);
 }
 
-TEST_CASE("Aufgabe 5.4 - print method", "[functions]")
+TEST_CASE("Aufgabe 5.4 and 5.5 - print method", "[functions]")
 {
     std::cout << "" << std::endl;
     Box box{"The test box", vec3{0,0,0}, vec3{2,2,2}, Color{0,1,0}};
     std::cout << box << std::endl;
 
-    Sphere sphere{"A badass sphere", vec3{0,0,0}, 5, Color{1,0,0}};
+    Sphere sphere{"A badass sphere", vec3{2,5,3}, 5, Color{1,0,0}};
     std::cout << sphere << std::endl;
 }
 

@@ -6,7 +6,11 @@ Color Shape::getColor() const { return color_; }
 
 std::ostream& Shape::print(std::ostream& os) const
 {
-	return (os << "My own print function is not implemented yet :(\n"
-			   << "But I am: \"" << name_ << "\"\n"
-			   << "I got the Color: " << color_.r << "," << color_.g << "," << color_.b << "\n");
+    return (os << "-----------------------------------\n"
+               << "I have no own print function :(\n"
+               << "But I am: \"" << name_ << "\"\n"
+               << "I got the Color: " << color_.r << "," << color_.g << "," << color_.b << "\n\n"
+               << "Area:\t" << area() << "\n"
+               << "Volume:\t" << volume() << "\n"
+               << "-----------------------------------\n");
 }

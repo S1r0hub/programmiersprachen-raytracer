@@ -17,22 +17,30 @@ float Box::volume() const
     return (a * b * c);
 }
 
+
 // getter
 
 glm::vec3 const& Box::getMinimum() const { return min_; }
 glm::vec3 const& Box::getMaximum() const { return max_; }
+
 
 // setter
 
 void Box::setMinimum(vec3 const& min) { min_ = min; }
 void Box::setMaximum(vec3 const& max) { max_ = max; }
 
-/*
+
+// console output
+
 std::ostream& Box::print(std::ostream& os) const
 {
-	// output Box infos here
-	return (os << "Type:\tBox" << "\n" 
-			   << "Name:\t" << name_ << "\n"
-		       << "Color:\t" << color_.r << "," << color_.g << "," << color_.b << "\n");
+    return (os << "-----------------------------------\n"
+               << "Type:\tBox" << "\n\n"
+               << "Name:\t" << name_ << "\n"
+               << "Color:\tr: " << color_.r << ", g: " << color_.g << ", b:" << color_.b << "\n"
+               << "Min:\tx: " << min_.x << ", y: " << min_.y << ", z: " << min_.z << "\n"
+               << "Max:\tx: " << max_.x << ", y: " << max_.y << ", z: " << max_.z << "\n\n"
+               << "Area:\t" << area() << "\n"
+               << "Volume:\t" << volume() << "\n"
+               << "-----------------------------------\n");
 }
-*/

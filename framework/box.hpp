@@ -10,12 +10,12 @@ class Box : public Shape
     typedef std::string str;
 
     public:
-    	Box() : Shape("",Color{0,0,0}), min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f}) {}
+        Box() : Shape("",Color{0,0,0}), min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f}) {}
 
         Box(vec3 const& min, vec3 const& max) : Shape("",Color{0,0,0}), min_(min), max_(max) {}
 
         // with name and color
-    	Box(str name, vec3 const& min, vec3 const& max, Color color = Color{0,0,0}) : Shape(name,color), min_(min), max_(max) {}
+        Box(str name, vec3 const& min, vec3 const& max, Color color = Color{0,0,0}) : Shape(name,color), min_(min), max_(max) {}
 
         Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z)
             : Shape("",Color{0,0,0})
@@ -41,7 +41,7 @@ class Box : public Shape
         void setMinimum(vec3 const& min);
         void setMaximum(vec3 const& min);
 
-        //std::ostream& print(std::ostream& os) const override;
+        std::ostream& print(std::ostream& os) const override;
 
     private:
         vec3 min_;

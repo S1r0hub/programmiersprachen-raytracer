@@ -49,7 +49,7 @@ class Sphere : public Shape
         vec3 setCenter(vec3 const& centerpoint);
         float setRadius(float radius);
 
-        //std::ostream& print(std::ostream& os) const override;
+        std::ostream& print(std::ostream& os) const override;
 
     private:
         vec3 cp; // center point
