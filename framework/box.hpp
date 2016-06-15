@@ -2,10 +2,7 @@
 #define BOX_HPP
 
 #include <glm/vec3.hpp>
-#include <ostream>
-#include <string>
 #include "shape.hpp"
-#include "color.hpp"
 
 class Box : public Shape
 {
@@ -18,7 +15,7 @@ class Box : public Shape
         Box(vec3 const& min, vec3 const& max) : Shape("",Color{0,0,0}), min_(min), max_(max) {}
 
         // with name and color
-    	Box(str name, vec3 const& min, vec3 const& max, Color color) : Shape(name,color), min_(min), max_(max) {}
+    	Box(str name, vec3 const& min, vec3 const& max, Color color = Color{0,0,0}) : Shape(name,color), min_(min), max_(max) {}
 
         Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z)
             : Shape("",Color{0,0,0})
@@ -27,7 +24,7 @@ class Box : public Shape
         {}
 
         // with name and color
-        Box(str name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Color color)
+        Box(str name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Color color = Color{0,0,0})
             : Shape(name,color)
             , min_(vec3{min_x,min_y,min_z})
             , max_(vec3{max_x,max_y,max_z})
@@ -44,7 +41,7 @@ class Box : public Shape
         void setMinimum(vec3 const& min);
         void setMaximum(vec3 const& min);
 
-        std::ostream& print(std::ostream& os) const override;
+        //std::ostream& print(std::ostream& os) const override;
 
     private:
         vec3 min_;

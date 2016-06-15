@@ -2,10 +2,7 @@
 #define SPHERE_HPP
 
 #include <glm/vec3.hpp>
-#include <ostream>
-#include <string>
 #include "shape.hpp"
-#include "color.hpp"
 
 class Sphere : public Shape
 {
@@ -52,7 +49,7 @@ class Sphere : public Shape
         vec3 setCenter(vec3 const& centerpoint);
         float setRadius(float radius);
 
-        std::ostream& print(std::ostream& os) const override;
+        //std::ostream& print(std::ostream& os) const override;
 
     private:
         vec3 cp; // center point

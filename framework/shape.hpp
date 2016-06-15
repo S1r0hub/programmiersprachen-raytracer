@@ -2,7 +2,7 @@
 #define SHAPE_HPP
 
 #include <string>
-#include <ostream>
+#include <iostream>
 #include "color.hpp"
 
 class Shape
@@ -27,11 +27,6 @@ class Shape
         Color color_;
 };
 
-/*
-std::ostream& operator<<(std::ostream& os, Shape const& s)
-{
-    //return s.print(os);
-}
-*/
+inline std::ostream& operator<<(std::ostream& os, Shape const& s) { return s.print(os); }
 
 #endif

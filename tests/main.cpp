@@ -1,10 +1,9 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 
-#define M_PI 3.14159265358979323846 // pi
-
 #include <glm/vec3.hpp>
 #include <memory>       // shared_ptr
+#include <iostream>
 
 #include "shape.hpp"
 #include "box.hpp"
@@ -65,7 +64,7 @@ TEST_CASE("Aufgabe 5.2 - sphere and box", "[sphereTest] [boxTest]")
     }
 }
 
-TEST_CASE("Aufgabe 5.3 - name_ and color_ for Sphere")
+TEST_CASE("Aufgabe 5.3 - name_ and color_ for Sphere", "[protected attributes]")
 {
     Box b1{"Coole Box", vec3{0,0,0}, vec3{2,2,2}, Color{1,0,1}};
     REQUIRE(b1.getName() == "Coole Box");
@@ -78,6 +77,16 @@ TEST_CASE("Aufgabe 5.3 - name_ and color_ for Sphere")
     REQUIRE(sp1.getColor().r == 0);
     REQUIRE(sp1.getColor().g == 1);
     REQUIRE(sp1.getColor().b == 0);
+}
+
+TEST_CASE("Aufgabe 5.4 - print method", "[functions]")
+{
+    std::cout << "" << std::endl;
+    Box box{"The test box", vec3{0,0,0}, vec3{2,2,2}, Color{0,1,0}};
+    std::cout << box << std::endl;
+
+    Sphere sphere{"A badass sphere", vec3{0,0,0}, 5, Color{1,0,0}};
+    std::cout << sphere << std::endl;
 }
 
 int main(int argc, char *argv[])

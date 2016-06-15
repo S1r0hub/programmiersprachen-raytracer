@@ -27,7 +27,12 @@ glm::vec3 const& Box::getMaximum() const { return max_; }
 void Box::setMinimum(vec3 const& min) { min_ = min; }
 void Box::setMaximum(vec3 const& max) { max_ = max; }
 
+/*
 std::ostream& Box::print(std::ostream& os) const
 {
 	// output Box infos here
+	return (os << "Type:\tBox" << "\n" 
+			   << "Name:\t" << name_ << "\n"
+		       << "Color:\t" << color_.r << "," << color_.g << "," << color_.b << "\n");
 }
+*/

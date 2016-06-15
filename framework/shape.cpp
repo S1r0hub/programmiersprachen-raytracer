@@ -6,5 +6,7 @@ Color Shape::getColor() const { return color_; }
 
 std::ostream& Shape::print(std::ostream& os) const
 {
-	return os << "Name:\t" << name_ << "\n";
+	return (os << "My own print function is not implemented yet :(\n"
+			   << "But I am: \"" << name_ << "\"\n"
+			   << "I got the Color: " << color_.r << "," << color_.g << "," << color_.b << "\n");
 }

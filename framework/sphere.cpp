@@ -1,6 +1,5 @@
 #define M_PI 3.14159265358979323846 // pi
 #include <cmath>
-#include <iostream>
 #include "sphere.hpp"
 
 // Oberflaeche - 4 * PI * r^2
@@ -27,7 +26,10 @@ glm::vec3 Sphere::setCenter(vec3 const& centerpoint) { cp = centerpoint; }
 
 float Sphere::setRadius(float radius) { radius_ = radius; }
 
+/*
 std::ostream& Sphere::print(std::ostream& os) const
 {
 	// output sphere infos here
+	return os;
 }
+*/
