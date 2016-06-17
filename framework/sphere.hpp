@@ -2,7 +2,9 @@
 #define SPHERE_HPP
 
 #include <glm/vec3.hpp>
+#include <glm/gtx/intersect.hpp>    // A 5.6
 #include "shape.hpp"
+#include "ray.hpp"                  // A 5.6
 
 class Sphere : public Shape
 {
@@ -49,7 +51,12 @@ class Sphere : public Shape
         vec3 setCenter(vec3 const& centerpoint);
         float setRadius(float radius);
 
+        // A 5.5
         std::ostream& print(std::ostream& os) const override;
+
+        // A 5.6 - intersect method
+        bool intersect(vec3 const& ray_orig, vec3 const& ray_dir, float& dist);
+        bool intersect(Ray const& ray, float& dist);
 
     private:
         vec3 cp; // center point

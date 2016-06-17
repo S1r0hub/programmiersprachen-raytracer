@@ -41,3 +41,26 @@ std::ostream& Sphere::print(std::ostream& os) const
                << "Volume:\t" << volume() << "\n"
                << "-----------------------------------\n");
 }
+
+// Aufgabe 5.6
+
+glm::vec3 rayAsVec(glm::vec3 const& ray_orig, glm::vec3 const& ray_dir)
+{
+    return glm::vec3{ray_orig.x + ray_dir.x, ray_orig.y + ray_dir.y, ray_orig.z + ray_dir.z};
+}
+
+bool Sphere::intersect(glm::vec3 const& ray_orig, glm::vec3 const& ray_dir, float& dist)
+{
+    glm::vec3 dirNorm = rayAsVec(ray_orig, ray_dir);
+
+    // normalize ray if it isnt yet
+    if (glm::length(dirNorm) != 1.0)
+    { dirNorm *= (1.0 / glm::length(dirNorm)); }
+
+    return glm::intersectRaySphere(ray_orig, dirNorm, cp, radius_, dist);
+}
+
+bool Sphere::intersect(Ray const& ray, float& dist)
+{
+    return intersect(ray.origin, ray.direction, dist);
+}

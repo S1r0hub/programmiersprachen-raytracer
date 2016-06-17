@@ -10,6 +10,11 @@
 #include "sphere.hpp"
 #include "color.hpp"
 
+// Aufgabe 5.6
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
+#include "ray.hpp"
+
 template<typename T> using sptr = std::shared_ptr<T>;
 typedef glm::vec3 vec3;
 
@@ -87,6 +92,47 @@ TEST_CASE("Aufgabe 5.4 and 5.5 - print method", "[functions]")
 
     Sphere sphere{"A badass sphere", vec3{2,5,3}, 5, Color{1,0,0}};
     std::cout << sphere << std::endl;
+}
+
+TEST_CASE("Aufgabe 5.6 - intersectRaySphere", "[intersect]")
+{
+    SECTION("basic test")
+    {
+        // Ray
+        glm::vec3 ray_origin{0.0,0.0,0.0};
+        // ray direction has to be normalized with
+        // v = glm::normalize(some_vector)
+        glm::vec3 ray_direction{0.0,0.0,1.0};
+
+        // Sphere
+        glm::vec3 sphere_center{0.0,0.0,5.0};
+        float sphere_radius{1.0};
+
+        float distance{0.0};
+        auto result = glm::intersectRaySphere(
+            ray_origin, ray_direction,
+            sphere_center, sphere_radius,
+            distance);
+
+        REQUIRE(distance == Approx(4.0f));
+    }
+
+    SECTION("intersect method test")
+    {
+        Sphere sphere{vec3{0.0,0.0,5.0}, 1.0};
+        Ray ray{vec3{0.0,0.0,0.0},vec3{0.0,0.0,1.0}};
+        float distance{0.0};
+        auto result = sphere.intersect(ray, distance);
+
+        REQUIRE(distance == Approx(4.0f));
+
+        Sphere sphere2{vec3{0.0,3.0,3.0}, 1.0};
+        Ray ray2{vec3{0.0,0.0,0.0},vec3{0.0,3.0,3.0}};
+        float distance2{0.0};
+        auto result2 = sphere2.intersect(ray2, distance2);
+
+        REQUIRE(distance2 == Approx(3.24264f));
+    }
 }
 
 int main(int argc, char *argv[])
