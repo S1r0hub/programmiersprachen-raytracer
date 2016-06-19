@@ -12,33 +12,37 @@ class Sphere : public Shape
     typedef std::string str;
 
     public:
-        Sphere() : Shape("",Color{0,0,0}), cp(vec3{0.f,0.f,0.f}), radius_(0.f) {}
+        Sphere() : Shape("",Color{0,0,0}), cp(vec3{0.f,0.f,0.f}), radius_(0.f)
+        { std::cout << "ctor Sphere" << std::endl; }
 
         Sphere(vec3 const& centerpoint, float radius)
             : Shape("",Color{0,0,0})
             , cp(centerpoint)
             , radius_(radius)
-        {}
+        { std::cout << "ctor Sphere" << std::endl; }
 
         // with name and color
         Sphere(str name, vec3 const& centerpoint, float radius, Color color)
             : Shape(name,color)
             , cp(centerpoint)
             , radius_(radius)
-        {}
+        { std::cout << "ctor Sphere" << std::endl; }
         
         Sphere(float cp_x, float cp_y, float cp_z, float radius)
             : Shape("",Color{0,0,0})
             , cp(vec3{cp_x,cp_y,cp_z})
             , radius_(radius)
-        {}
+        { std::cout << "ctor Sphere" << std::endl; }
 
         // with name and color
         Sphere(str name, float cp_x, float cp_y, float cp_z, float radius, Color color)
             : Shape(name,color)
             , cp(vec3{cp_x,cp_y,cp_z})
             , radius_(radius)
-        {}
+        { std::cout << "ctor Sphere" << std::endl; }
+
+        // 5.8
+        ~Sphere() { std::cout << "dtor Sphere" << std::endl; }
 
         float area() const override;
         float volume() const override;

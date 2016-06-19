@@ -10,25 +10,31 @@ class Box : public Shape
     typedef std::string str;
 
     public:
-        Box() : Shape("",Color{0,0,0}), min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f}) {}
+        Box() : Shape("",Color{0,0,0}), min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f})
+        { std::cout << "ctor Box" << std::endl; }
 
-        Box(vec3 const& min, vec3 const& max) : Shape("",Color{0,0,0}), min_(min), max_(max) {}
+        Box(vec3 const& min, vec3 const& max) : Shape("",Color{0,0,0}), min_(min), max_(max)
+        { std::cout << "ctor Box" << std::endl; }
 
         // with name and color
-        Box(str name, vec3 const& min, vec3 const& max, Color color = Color{0,0,0}) : Shape(name,color), min_(min), max_(max) {}
+        Box(str name, vec3 const& min, vec3 const& max, Color color = Color{0,0,0}) : Shape(name,color), min_(min), max_(max)
+        { std::cout << "ctor Box" << std::endl; }
 
         Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z)
             : Shape("",Color{0,0,0})
             , min_(vec3{min_x,min_y,min_z})
             , max_(vec3{max_x,max_y,max_z})
-        {}
+        { std::cout << "ctor Box" << std::endl; }
 
         // with name and color
         Box(str name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Color color = Color{0,0,0})
             : Shape(name,color)
             , min_(vec3{min_x,min_y,min_z})
             , max_(vec3{max_x,max_y,max_z})
-        {}
+        { std::cout << "ctor Box" << std::endl; }
+
+        // 5.8
+        ~Box() { std::cout << "dtor Box" << std::endl; }
         
         float area() const override;
         float volume() const override;

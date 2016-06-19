@@ -1,0 +1,50 @@
+----------------------------------------------
+--- 5.8 - constructor and destructor tests ---
+----------------------------------------------
+
+
+-------------- creating objects --------------
+
+ctor Shape
+ctor Sphere
+ctor Shape
+ctor Sphere
+
+-------------- printing objects --------------
+
+-----------------------------------
+Type:	Sphere
+
+Name:	sphere0
+Color:	r: 255, g: 0, b: 0
+Center:	x: 0, y: 0, z: 0
+Radius:	1.2
+
+Area:	18.0956
+Volume:	7.23823
+-----------------------------------
+-----------------------------------
+Type:	Sphere
+
+Name:	sphere1
+Color:	r: 255, g: 0, b: 0
+Center:	x: 0, y: 0, z: 0
+Radius:	1.2
+
+Area:	18.0956
+Volume:	7.23823
+-----------------------------------
+
+-------------- deleting objects --------------
+
+dtor Sphere
+dtor Shape
+dtor Sphere
+dtor Shape
+
+----------------------------------------------
+
+
+===============================================================================
+All tests passed (26 assertions in 5 test cases)
+

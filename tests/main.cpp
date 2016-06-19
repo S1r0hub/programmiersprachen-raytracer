@@ -111,7 +111,7 @@ TEST_CASE("Aufgabe 5.6 - intersectRaySphere", "[intersect]")
         float distance{0.0};
         auto result = glm::intersectRaySphere(
             ray_origin, ray_direction,
-            sphere_center, sphere_radius,
+            sphere_center, sphere_radius * sphere_radius,
             distance);
 
         REQUIRE(distance == Approx(4.0f));
@@ -126,13 +126,40 @@ TEST_CASE("Aufgabe 5.6 - intersectRaySphere", "[intersect]")
 
         REQUIRE(distance == Approx(4.0f));
 
-        Sphere sphere2{vec3{0.0,3.0,3.0}, 1.0};
+        Sphere sphere2{vec3{0.0,3.0,3.0}, 2.0};
         Ray ray2{vec3{0.0,0.0,0.0},vec3{0.0,3.0,3.0}};
         float distance2{0.0};
         auto result2 = sphere2.intersect(ray2, distance2);
 
-        REQUIRE(distance2 == Approx(3.24264f));
+        REQUIRE(distance2 == Approx(2.24264f));
     }
+}
+
+TEST_CASE("Aufgabe 5.8 - virtual destructor for class shape", "[virtualdtor]")
+{
+    std::cout << "\n\n----------------------------------------------\n"
+              << "--- 5.8 - constructor and destructor tests ---\n"
+              << "----------------------------------------------\n" << std::endl;
+
+    Color red(255,0,0);
+    vec3 position(0.0,0.0,0.0);
+
+    std::cout << "\n-------------- creating objects --------------\n" << std::endl;
+
+    Sphere* s1 = new Sphere{"sphere0", position, 1.2f, red};
+    Shape* s2 = new Sphere{"sphere1", position, 1.2f, red};
+
+    std::cout << "\n-------------- printing objects --------------\n" << std::endl;
+
+    s1->print(std::cout);
+    s2->print(std::cout);
+
+    std::cout << "\n-------------- deleting objects --------------\n" << std::endl;
+
+    delete s1;
+    delete s2;
+
+    std::cout << "\n----------------------------------------------\n\n" << std::endl;
 }
 
 int main(int argc, char *argv[])

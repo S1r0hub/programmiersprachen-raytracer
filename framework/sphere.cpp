@@ -57,7 +57,7 @@ bool Sphere::intersect(glm::vec3 const& ray_orig, glm::vec3 const& ray_dir, floa
     if (glm::length(dirNorm) != 1.0)
     { dirNorm *= (1.0 / glm::length(dirNorm)); }
 
-    return glm::intersectRaySphere(ray_orig, dirNorm, cp, radius_, dist);
+    return glm::intersectRaySphere(ray_orig, dirNorm, cp, radius_ * radius_, dist);
 }
 
 bool Sphere::intersect(Ray const& ray, float& dist)
