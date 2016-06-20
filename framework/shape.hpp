@@ -32,8 +32,6 @@ class Shape
         Color color_;
 };
 
-// inline notwendig sonst Mehrfachimplementierung selber Funktion
-inline std::ostream& operator<<(std::ostream& os, Shape const& s)
-{ return s.print(os); }
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 
 #endif
