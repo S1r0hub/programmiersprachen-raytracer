@@ -48,7 +48,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/${GLM_DIRECTORY})
 # Add libraries to executables
 
 set(LIBRARIES glfw ${GLFW_LIBRARIES})
-set(CATCH_DIRECTORY catch-1.1)
+set(CATCH_DIRECTORY catch-1.5)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/${CATCH_DIRECTORY})
 
 ################################
