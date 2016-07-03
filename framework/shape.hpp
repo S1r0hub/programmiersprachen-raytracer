@@ -4,28 +4,32 @@
 #include <string>
 #include <iostream>
 #include "color.hpp"
+#include "ray.hpp"
 
 class Shape
 {
     typedef std::string str;
 
     public:
-        Shape() : name_(""), color_(Color{0,0,0}) { std::cout << "ctor Shape" << std::endl; }
+        Shape();
 
-        Shape(str name, Color color) : name_(name), color_(color) { std::cout << "ctor Shape" << std::endl; }
+        Shape(str name, Color color);
 
         // 5.8 - test 1
         //virtual ~Shape() { std::cout << "dtor Shape" << std::endl; }
         // 5.8 - test 2
-        ~Shape() { std::cout << "dtor Shape" << std::endl; }
+        ~Shape() { /*std::cout << "dtor Shape" << std::endl;*/ }
 
         virtual float area() const = 0;
         virtual float volume() const = 0;
 
         virtual std::ostream& print(std::ostream& os) const;
 
-        str getName() const;
-        Color getColor() const;
+        str const& getName() const;
+        Color const& getColor() const;
+
+        // 6.3
+        virtual bool intersect(Ray const& ray, float& t) const = 0;
     
     protected:
         str name_;

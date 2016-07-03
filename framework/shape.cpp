@@ -1,8 +1,14 @@
 #include "shape.hpp"
 
-std::string Shape::getName() const { return name_; }
+// Constructor
+Shape::Shape() : name_(""), color_(Color{0,0,0}) { /*std::cout << "ctor Shape" << std::endl;*/ }
+Shape::Shape(str name, Color color) : name_(name), color_(color) { /*std::cout << "ctor Shape" << std::endl;*/ }
 
-Color Shape::getColor() const { return color_; }
+
+// Getter and Setter
+std::string const& Shape::getName() const { return name_; }
+
+Color const& Shape::getColor() const { return color_; }
 
 std::ostream& Shape::print(std::ostream& os) const
 {

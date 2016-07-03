@@ -1,5 +1,29 @@
 #include "box.hpp"
 
+// Constructor
+Box::Box() : Shape("",Color{0,0,0}), min_(vec3{0.f,0.f,0.f}), max_(vec3{0.f,0.f,0.f}) { /*std::cout << "ctor Box" << std::endl;*/ }
+
+Box::Box(vec3 const& min, vec3 const& max) : Shape("",Color{0,0,0}), min_(min), max_(max) { /*std::cout << "ctor Box" << std::endl;*/ }
+
+Box::Box(str const& name, vec3 const& min, vec3 const& max, Color const& color)
+        : Shape(name,color)
+        , min_(min)
+        , max_(max)
+        { /*std::cout << "ctor Box" << std::endl;*/ }
+
+Box::Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z)
+        : Shape("",Color{0,0,0})
+        , min_(vec3{min_x,min_y,min_z})
+        , max_(vec3{max_x,max_y,max_z})
+        { /*std::cout << "ctor Box" << std::endl;*/ }
+
+Box::Box(str const& name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Color const& color)
+        : Shape(name,color)
+        , min_(vec3{min_x,min_y,min_z})
+        , max_(vec3{max_x,max_y,max_z})
+        { /*std::cout << "ctor Box" << std::endl;*/ }
+
+
 // Oberflaeche
 float Box::area() const
 {
@@ -43,4 +67,16 @@ std::ostream& Box::print(std::ostream& os) const
                << "Area:\t" << area() << "\n"
                << "Volume:\t" << volume() << "\n"
                << "-----------------------------------\n");
+}
+
+
+// using Shirley's algorithm
+bool Box::intersect(Ray const& ray, float& t) const
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        // intersection incomming
+    }
+
+    return true;
 }
