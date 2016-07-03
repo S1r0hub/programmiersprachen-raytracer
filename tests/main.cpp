@@ -170,11 +170,44 @@ TEST_CASE("Aufgabe 5.8 - virtual destructor for class shape", "[virtualdtor]")
 
 TEST_CASE("6.3 tests - intersection box", "[intersection]")
 {
-    Box b1 = Box{vec3{2,1,0}, vec3{2,2,1}};
-    Ray r = Ray{vec3{0,0,0}, vec3{1,1.5,0.5}};
-    float d = 0;
+    SECTION("Strahl schneidet")
+    {
+        Box b1 = Box{vec3{-1,2,-1}, vec3{1,4,1}};
+        Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
+        float d = 0;
 
-    std::cout << "Intersection: " << ((b1.intersect(r, d) > 0) ? "yes!" : "no :(") << std::endl;
+        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+
+        b1 = Box{vec3{1,0,-2}, vec3{3,3,2}};
+        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
+
+        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+
+        b1 = Box{vec3{100,0,-2}, vec3{105,3,2}};
+        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
+
+        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+    }
+
+    SECTION("Strahl schneidet nicht")
+    {
+        Box b1 = Box{vec3{1,2,1}, vec3{1,4,1}};
+        Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
+        float d = 0;
+
+        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+
+        // test2
+        b1 = Box{vec3{2,2,2}, vec3{3,3,3}};
+        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
+        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+
+        r = Ray{vec3{0,0,0}}, vec3{0,1,0};
+        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+
+        r = Ray{vec3{0,0,0}}, vec3{0,0,1};
+        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+    }
 }
 
 int main(int argc, char *argv[])

@@ -70,29 +70,44 @@ std::ostream& Box::print(std::ostream& os) const
 }
 
 
-// using Shirley's algorithm
+// using algorithm from:
+// http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
+
 bool Box::intersect(Ray const& ray, float& t) const
 {
-    glm::vec3 dirNorm = ray.normDir();
+    //glm::vec3 dirNorm = ray.normDir();
+    glm::vec3 dirNorm = ray.direction;
 
-    float tmin = 0;
-    float tmax = 0;
+    float txMin = (min_.x - ray.origin.x) / dirNorm.x;
+    float txMax = (max_.x - ray.origin.x) / dirNorm.x;
 
-    for (int i = 0; i < 3; ++i)
-    {
-        float invDir = 1.0f / dirNorm[i];
-        float t0 = (min_[i] - ray.origin[i]) * invDir;
-        float t1 = (max_[i] - ray.origin[i]) * invDir;
+    // Tausche txMin und txMax, falls Min > Max
+    if (txMin > txMax) std::swap(txMin, txMax);
 
-        if (invDir < 0.0f) { std::swap(t0,t1); }
+    float tyMin = (min_.y - ray.origin.y) / dirNorm.y;
+    float tyMax = (max_.y - ray.origin.y) / dirNorm.y;
 
-        tmin = (t0 > tmin) ? t0 : tmin;
-        tmax = (t1 < tmax) ? t1 : tmax;
+    // Tausche tyMin und tyMax, falls Min > Max
+    if (tyMin > tyMax) { std::swap(tyMin, tyMax); }
 
-        std::cout << "TMIN: " << tmin << "\nTMAX: " << tmax << std::endl;
+    // Kein Schnitt
+    if ((txMin > tyMax) || (tyMin > txMax)) { return false; }
 
-        if (tmax < tmin) { return false; }
-    }
+    if (tyMin > txMin) { txMin = tyMin; }
+    if (tyMax < txMax) { txMax = tyMax; }
 
+    float tzMin = (min_.z - ray.origin.z) / dirNorm.z;
+    float tzMax = (max_.z - ray.origin.z) / dirNorm.z;
+
+    // Tausche tzMin und tzMax, falls Min > Max
+    if (tzMin > tzMax) std::swap(tzMin, tzMax);
+
+    // Kein Schnitt
+    if ((txMin > tzMax) || (tzMin > txMax)) { return false; }
+
+    if (tzMin > txMin) { txMin = tzMin; }
+    if (tzMax < txMax) { txMax = tzMax; }
+
+    // Schnitt vorhanden
     return true;
 }
