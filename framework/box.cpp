@@ -136,6 +136,8 @@ bool Box::intersect(Ray const& ray, float& t) const
         tmax = t1 < tmax ? t1 : tmax;
 
         if (tmax < tmin) { return false; }
+
+        t = tmin;
     }
 
     return true;

@@ -19,8 +19,8 @@
 ###Aufgabenblatt 6
 
 - [x] Aufgabe 6.01 - **05P** - Skizze + Erklärung Ray Tracing
-- [ ] Aufgabe 6.02 - **10P** - UML Klassendiagramm
-- [ ] Aufgabe 6.03 - **08P** - ray box intersection method
+- [x] Aufgabe 6.02 - **10P** - UML Klassendiagramm
+- [x] Aufgabe 6.03 - **08P** - ray box intersection method
 - [x] Aufgabe 6.04 - **05P** - material class
-- [ ] Aufgabe 6.05 - **05P** - reading materials
-- [ ] Aufgabe 6.06 - **03P** - SDFLoader + DTO Scene
+- [x] Aufgabe 6.05 - **05P** - reading materials
+- [x] Aufgabe 6.06 - **03P** - SDFLoader + DTO Scene

@@ -10,6 +10,8 @@
 #include "sphere.hpp"
 #include "color.hpp"
 
+#include "material.hpp"
+
 // Aufgabe 5.6
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
@@ -176,18 +178,21 @@ TEST_CASE("6.3 tests - intersection box", "[intersection]")
         Box b1 = Box{vec3{-1,2,-1}, vec3{1,4,1}};
         Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
         REQUIRE(b1.intersect(r, d) == true);
+        REQUIRE(d == 2);
 
         //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
 
         b1 = Box{vec3{1,0,-2}, vec3{3,3,2}};
         r = Ray{vec3{0,0,0}, vec3{1,0,0}};
         REQUIRE(b1.intersect(r, d) == true);
+        REQUIRE(d == 1);
 
         //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
 
         b1 = Box{vec3{100,0,-2}, vec3{105,3,2}};
         r = Ray{vec3{0,0,0}, vec3{1,0,0}};
         REQUIRE(b1.intersect(r, d) == true);
+        REQUIRE(d == 100);
 
         //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
     }
