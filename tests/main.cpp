@@ -172,41 +172,47 @@ TEST_CASE("6.3 tests - intersection box", "[intersection]")
 {
     SECTION("Strahl schneidet")
     {
+        float d = 0;
         Box b1 = Box{vec3{-1,2,-1}, vec3{1,4,1}};
         Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
-        float d = 0;
+        REQUIRE(b1.intersect(r, d) == true);
 
-        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+        //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
 
         b1 = Box{vec3{1,0,-2}, vec3{3,3,2}};
-        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
+        r = Ray{vec3{0,0,0}, vec3{1,0,0}};
+        REQUIRE(b1.intersect(r, d) == true);
 
-        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+        //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
 
         b1 = Box{vec3{100,0,-2}, vec3{105,3,2}};
-        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
+        r = Ray{vec3{0,0,0}, vec3{1,0,0}};
+        REQUIRE(b1.intersect(r, d) == true);
 
-        std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
+        //std::cout << "Intersection (yes): " << b1.intersect(r, d) << std::endl;
     }
 
     SECTION("Strahl schneidet nicht")
     {
-        Box b1 = Box{vec3{1,2,1}, vec3{1,4,1}};
-        Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
         float d = 0;
-
-        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        Box b1 = Box{vec3{1,2,1}, vec3{2,4,2}};
+        Ray r = Ray{vec3{0,0,0}, vec3{0,1,0}};
+        //std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        REQUIRE(b1.intersect(r, d) == false);
 
         // test2
         b1 = Box{vec3{2,2,2}, vec3{3,3,3}};
-        r = Ray{vec3{0,0,0}}, vec3{1,0,0};
-        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        r = Ray{vec3{0,0,0}, vec3{1,0,0}};
+        //std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        REQUIRE(b1.intersect(r, d) == false);
 
-        r = Ray{vec3{0,0,0}}, vec3{0,1,0};
-        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        r = Ray{vec3{0,0,0}, vec3{0,1,0}};
+        //std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        REQUIRE(b1.intersect(r, d) == false);
 
-        r = Ray{vec3{0,0,0}}, vec3{0,0,1};
-        std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        r = Ray{vec3{0,0,0}, vec3{0,0,1}};
+        //std::cout << "Intersection (no): " << b1.intersect(r, d) << std::endl;
+        REQUIRE(b1.intersect(r, d) == false);
     }
 }
 

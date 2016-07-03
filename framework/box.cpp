@@ -70,7 +70,8 @@ std::ostream& Box::print(std::ostream& os) const
 }
 
 
-// using algorithm from:
+/*
+// algorithm from:
 // http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
 
 bool Box::intersect(Ray const& ray, float& t) const
@@ -109,5 +110,33 @@ bool Box::intersect(Ray const& ray, float& t) const
     if (tzMax < txMax) { txMax = tzMax; }
 
     // Schnitt vorhanden
+    return true;
+}
+*/
+
+// Shirley's algorithm
+// http://psgraphics.blogspot.de/2016/02/new-simple-ray-box-test-from-andrew.html
+
+bool Box::intersect(Ray const& ray, float& t) const
+{
+    float tmin = -std::numeric_limits<float>::infinity();
+    float tmax = std::numeric_limits<float>::infinity();
+
+    glm::vec3 normDir = ray.normDir();
+
+    for (int i = 0; i < 3; ++i)
+    {
+        float invDiv = 1.0f / normDir[i];
+        float t0 = (min_[i] - ray.origin[i]) * invDiv;
+        float t1 = (max_[i] - ray.origin[i]) * invDiv;
+
+        if (invDiv < 0.0f) { std::swap(t0,t1); }
+
+        tmin = t0 > tmin ? t0 : tmin;
+        tmax = t1 < tmax ? t1 : tmax;
+
+        if (tmax < tmin) { return false; }
+    }
+
     return true;
 }
