@@ -18,6 +18,7 @@
 template<typename T> using sptr = std::shared_ptr<T>;
 typedef glm::vec3 vec3;
 
+/*
 TEST_CASE("Aufgabe 5.2 - sphere and box", "[sphereTest] [boxTest]")
 {
     SECTION("Box")
@@ -93,7 +94,8 @@ TEST_CASE("Aufgabe 5.4 and 5.5 - print method", "[functions]")
     Sphere sphere{"A badass sphere", vec3{2,5,3}, 5, Color{1,0,0}};
     std::cout << sphere << std::endl;
 }
-
+*/
+/*
 TEST_CASE("Aufgabe 5.6 - intersectRaySphere", "[intersect]")
 {
     SECTION("basic test")
@@ -134,7 +136,8 @@ TEST_CASE("Aufgabe 5.6 - intersectRaySphere", "[intersect]")
         REQUIRE(distance2 == Approx(2.24264f));
     }
 }
-
+*/
+/*
 TEST_CASE("Aufgabe 5.8 - virtual destructor for class shape", "[virtualdtor]")
 {
     std::cout << "\n\n----------------------------------------------\n"
@@ -160,6 +163,18 @@ TEST_CASE("Aufgabe 5.8 - virtual destructor for class shape", "[virtualdtor]")
     delete s2;
 
     std::cout << "\n----------------------------------------------\n\n" << std::endl;
+}
+*/
+
+// Aufgabenblatt 6
+
+TEST_CASE("6.3 tests - intersection box", "[intersection]")
+{
+    Box b1 = Box{vec3{2,1,0}, vec3{2,2,1}};
+    Ray r = Ray{vec3{0,0,0}, vec3{1,1.5,0.5}};
+    float d = 0;
+
+    std::cout << "Intersection: " << ((b1.intersect(r, d) > 0) ? "yes!" : "no :(") << std::endl;
 }
 
 int main(int argc, char *argv[])

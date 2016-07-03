@@ -14,16 +14,16 @@ class Box : public Shape
 
         Box(vec3 const& min, vec3 const& max);
 
-        // with name and color
-        Box(str const& name, vec3 const& min, vec3 const& max, Color const& color = Color{0,0,0});
+        // with name and material
+        Box(str const& name, vec3 const& min, vec3 const& max, Material const& material = Material{});
 
         Box(float min_x, float min_y, float min_z, float max_x, float max_y, float max_z);
 
-        // with name and color
-        Box(str const& name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Color const& color = Color{0,0,0});
+        // with name and material
+        Box(str const& name, float min_x, float min_y, float min_z, float max_x, float max_y, float max_z, Material const& material = Material{});
 
         // 5.8
-        ~Box() { /*std::cout << "dtor Box" << std::endl;*/ }
+        //~Box() {}
         
         float area() const override;
         float volume() const override;

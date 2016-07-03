@@ -15,16 +15,15 @@ class Sphere : public Shape
 
         Sphere(vec3 const& centerpoint, float radius);
 
-        // with name and color
-        Sphere(str name, vec3 const& centerpoint, float radius, Color color);
+        // with name and material
+        Sphere(str const& name, vec3 const& centerpoint, float radius, Material const& material = Material{});
         
         Sphere(float cp_x, float cp_y, float cp_z, float radius);
 
-        // with name and color
-        Sphere(str name, float cp_x, float cp_y, float cp_z, float radius, Color color = Color{0,0,0});
+        // with name and material
+        Sphere(str const& name, float cp_x, float cp_y, float cp_z, float radius, Material const& material = Material{});
 
-        // 5.8
-        ~Sphere() { /*std::cout << "dtor Sphere" << std::endl;*/ }
+        //~Sphere() {}
 
         float area() const override;
         float volume() const override;
@@ -41,7 +40,6 @@ class Sphere : public Shape
         std::ostream& print(std::ostream& os) const override;
 
         // A 5.6 - intersect method
-        bool intersect(vec3 const& ray_orig, vec3 const& ray_dir, float& dist) const; // no override cause just called by the other method
         bool intersect(Ray const& ray, float& dist) const override;
 
     private:
