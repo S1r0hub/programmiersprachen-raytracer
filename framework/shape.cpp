@@ -3,7 +3,7 @@
 // Constructor
 Shape::Shape() : name_(""), material_(Material{}) {}
 
-Shape::Shape(str name, Material material) : name_(name), material_(material) {}
+Shape::Shape(str const& name, Material const& material) : name_(name), material_(material) {}
 
 
 // Getter and Setter

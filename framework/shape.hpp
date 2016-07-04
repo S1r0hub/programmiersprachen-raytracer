@@ -14,7 +14,7 @@ class Shape
     public:
         Shape();
 
-        Shape(str name, Material material);
+        Shape(str const& name, Material const& material);
 
         //~Shape() {}
 
