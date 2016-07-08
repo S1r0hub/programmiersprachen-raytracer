@@ -71,6 +71,5 @@ std::ostream& Sphere::print(std::ostream& os) const
 
 bool Sphere::intersect(Ray const& ray, float& dist) const
 {
-    glm::vec3 dirNorm = ray.normDir();
-    return glm::intersectRaySphere(ray.origin, dirNorm, cp, radius_ * radius_, dist);
+    return glm::intersectRaySphere(ray.origin, ray.normDir(), cp, radius_ * radius_, dist);
 }
