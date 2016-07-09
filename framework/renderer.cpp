@@ -13,6 +13,7 @@
 #include <cmath>
 #include "ray.hpp"
 #include "sphere.hpp"
+#include "box.hpp"
 #include <glm/vec3.hpp>
 
 
@@ -79,11 +80,27 @@ void Renderer::render()
       */
       
       // Sphere
-      Sphere sphere{glm::vec3{5.0,5.0,5.0},1.0f};
-      Ray ray{glm::vec3{(float) x / 100.0f,(float) y / 100.0f,0}, glm::vec3{0,0,1.0f}};
+      float resolution = 100.0f;
+      Sphere sphere{glm::vec3{3.0,3.0,5.0},1.5f};
+      Box box{glm::vec3{1.0,0.1,1},glm::vec3{5.5,1,8}};
+      Ray ray{glm::vec3{(float) x / resolution,(float) y / resolution,0}, glm::vec3{0.1,-0.1,1.0f}};
+      
       float dist = 0;
+      float fog = 6;
+      float ambientBrightness = 0.2f;
 
-      if (sphere.intersect(ray,dist)) { p.color = Color{1.0,0.0,0.0}; }
+      if (sphere.intersect(ray,dist))
+      {
+        float mult = 1-(dist/fog);
+        if (mult < ambientBrightness) { mult = ambientBrightness; }
+        p.color = Color{mult * 1.0f,0.0,0.0};
+      }
+      else if (box.intersect(ray,dist))
+      {
+        float mult = 1-(dist/fog);
+        if (mult < ambientBrightness) { mult = ambientBrightness; }
+        p.color = Color{0.0,mult * 0.5f,0.0};
+      }
       else { p.color = Color{0.0,0.0,0.0}; }
       
       write(p);
