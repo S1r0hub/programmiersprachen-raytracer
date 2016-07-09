@@ -11,10 +11,10 @@
 
 #include <iostream>
 #include <cmath>
-#include "ray.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
 #include <glm/vec3.hpp>
+#include <vector>
 
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
@@ -58,13 +58,57 @@ bool prim(int z)
     }
 }
 
+void Renderer::intersecting(Ray const& ray, float& dist, Color& color, glm::vec3 const& lightPos, bool lightCheck, std::vector<std::shared_ptr<Shape>> objs)
+{
+  float minDist = 999999;
+
+  float sI = 0.5; // intensity
+  Color shadowColor{color.r * sI, color.g * sI, color.b * sI};
+
+  for (auto o : objs)
+  {
+    bool intersected = false;
+
+    if (o->intersect(ray,dist) && o->getName() == "sp")
+    {
+      if (!lightCheck) {
+        color = Color{1.0,0.0,0.0};
+        if (dist < minDist) { minDist = dist; }
+
+        glm::vec3 orig = ray.origin + ((dist-0.1f) * ray.normDir());
+        Ray toLight{orig, lightPos - orig};
+        intersecting(toLight,dist,color,lightPos,true,objs);
+      }
+      else {
+        color = shadowColor;
+      }
+
+      intersected = true;
+    }
+    
+    if (o->intersect(ray,dist) && o->getName() == "bx" && dist < minDist)
+    {
+      if (!lightCheck) {
+        color = Color{0.0,0.5f,0.0};
+
+        glm::vec3 orig = ray.origin + ((dist-0.1f) * ray.normDir());
+        Ray toLight{orig, lightPos - orig};
+        intersecting(toLight,dist,color,lightPos,true,objs);
+      }
+      else { color = shadowColor; }
+
+      intersected = true;
+    }
+
+    if (intersected) { break; }
+  }
+}
+
 void Renderer::render()
 {
   const std::size_t checkersize = 20;
 
   int pxnum = 0;
-
-  std::cout << prim(15) << std::endl;
 
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
@@ -79,15 +123,18 @@ void Renderer::render()
       else { p.color = Color(0.0,0.0,0.0); }
       */
       
-      // Sphere
+
+      // Easy ray trace test 1
+      /*
       float resolution = 100.0f;
-      Sphere sphere{glm::vec3{3.0,3.0,5.0},1.5f};
-      Box box{glm::vec3{1.0,0.1,1},glm::vec3{5.5,1,8}};
-      Ray ray{glm::vec3{(float) x / resolution,(float) y / resolution,0}, glm::vec3{0.1,-0.1,1.0f}};
-      
       float dist = 0;
       float fog = 6;
       float ambientBrightness = 0.2f;
+
+      Sphere sphere{glm::vec3{3.0,3.0,5.0},1.5f};
+      Box box{glm::vec3{1.0,0.1,1},glm::vec3{5.5,1,8}};
+      
+      Ray ray{glm::vec3{(float) x / resolution,(float) y / resolution,0}, glm::vec3{0.1,-0.1,1.0f}};
 
       if (sphere.intersect(ray,dist))
       {
@@ -102,7 +149,30 @@ void Renderer::render()
         p.color = Color{0.0,mult * 0.5f,0.0};
       }
       else { p.color = Color{0.0,0.0,0.0}; }
+      */
+
+
+      // A bit more advanced raytrace test 2
+      auto sphere = std::make_shared<Sphere>(Sphere{"sp",glm::vec3{3,4.0,3.0},2.0f});
+      auto box = std::make_shared<Box>(Box{"bx",glm::vec3{2.0,-2.0,1},glm::vec3{4,0,1.5}});
+      auto box2 = std::make_shared<Box>(Box{"bx",glm::vec3{-3.0,-3.0,1},glm::vec3{-1,-1,1.5}});
       
+      std::vector<std::shared_ptr<Shape>> objects{sphere, box, box2};
+
+      float resolution = 100.0f;
+      float dist = 0;
+      float fov = 0.6;
+
+      Ray ray{glm::vec3{0, 0, 0}, glm::vec3{(float) x / resolution - ((float) width_ / resolution / 2.0f),(float) y / resolution - ((float) height_ / resolution / 2.0f),fov}};
+      
+      // background color
+      p.color = Color{0.1,0.1,0.1};
+
+      // light pos
+      glm::vec3 lp{0.0f,0.0f,0.0f};
+
+      intersecting(ray, dist, p.color, lp, false, objects);
+
       write(p);
     }
   }

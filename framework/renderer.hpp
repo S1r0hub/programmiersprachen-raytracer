@@ -16,6 +16,11 @@
 #include <string>
 #include <glm/glm.hpp>
 
+
+#include "ray.hpp"
+#include "shape.hpp"
+#include <memory>
+
 class Renderer
 {
 public:
@@ -28,6 +33,8 @@ public:
   {
     return colorbuffer_;
   }
+
+  void intersecting(Ray const& ray, float& dist, Color& color, glm::vec3 const& lightPos, bool lightCheck, std::vector<std::shared_ptr<Shape>> objs);
 
 private:
   unsigned width_;
